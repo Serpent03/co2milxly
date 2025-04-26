@@ -1,0 +1,29 @@
+!! denotes this line as a comment
+
+!! This file contains information on all the different
+!! types of units and its MilX equivalent.
+
+infantry,leginf     : S-GPUCI--------
+infantry,motinf     : S-GPUCIM-------
+infantry,cav        : S-GPUCRVG------
+infantry,nonarmhq   : S-GPUCI---A----
+infantry,mechrecon  : S-GPUCRVG------
+artillery,antitank  : S-G-UCAA-------
+logistics,base      : S-GPUSS--------
+artillery,mortar    : S-GPUCF--------
+infantry,mginf      : S-G-UCDG-------
+infantry,combateng  : S-G-UCEC-------
+artillery,artillery : S-GPUCF--------
+armour,armhq        : S-G-UCA---A----
+armour,tank         : S-G-UCA--------
+armour,assaultgun   : S-G-UCFH-------
+infantry,legrecon   : S-GPUCRVG------
+infantry,infantry   : S-GPUCI--------
+artillery,spinfgun  : S-G-UCFHE------
+
+!! If you get an error like "key error for infantry,coyhq"
+!! or something like "key error for artillery,depot", etc.,
+!! then that means this(not exhaustive) list is incomplete
+!! with the conversion information. In that case, feel free
+!! to open a new issue on github or contact Serpent on the 
+!! Command Ops 2 discord.
