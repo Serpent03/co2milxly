@@ -13,7 +13,7 @@ Mons, 1914, by Zed
 ![Mons, 1914, by Zed](https://i.imgur.com/JGC6nN9.jpeg)
 
 Skirmish at Carpiquet Airfield, 1944, by Bie
-![Skirmish at Carpiquet Airfield, 1944, by Bie](https://i.imgur.com/IulOaKw.png)
+![Skirmish at Carpiquet Airfield, 1944, by Bie](https://i.imgur.com/rLuKerz.png)
 
 
 ## Usage
