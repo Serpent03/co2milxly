@@ -8,11 +8,25 @@ You need the following on your computer to run this tool:
  - lxml (pip install lxml)
 ```
 
+## Examples
+Mons, 1914, by Zed
+![Mons, 1914, by Zed](https://i.imgur.com/JGC6nN9.jpeg)
+
+Skirmish at Carpiquet Airfield, 1944, by Bie
+![Skirmish at Carpiquet Airfield, 1944, by Bie](https://i.imgur.com/IulOaKw.png)
+
+
 ## Usage
 If running locally, simply do: `python3 ./kml2milx.py <your input kml> <name of output milx file>`.
 
 ## How does it work?
-This tool uses a custom rule set(inside `co2milx.txt`) to generate MilX units. Since the ruleset is quite small right now, you *might* face errors. To fix this, either:
+First, run CO2's `GameStatExporter.exe`, available inside the `steam/steamapps/common/Command Ops 2/` directory. An example command could look like this: 
+
+`./GameStatExporter.exe --x1 7040 --y1 6042 --lat1 49.16842242789466 --lon1 -0.4080172720070224 --x2 1160 --y2 4456 --lat2 49.178824855714275 --lon2 -0.4867884792074451 --input ".\Saved Games\attack_on_airport_D1_0505.cog"`
+
+To achieve the generation of KML files, the `GameStatExporter.exe` links two coordinates in the game(X,Y) against two coordinates in the real life(lat, long). Accuracy gets better and better if both of these coordinates are as far away from each other as possible - like the diagonally opposite corners of the map. What it basically does is tells the tool that `x1,y1` in the game maps to `lat1,lon1`; `x2,y2` maps to `lat2,lon2`; and interpolation for any game coordinate to real world WGS84 coordinate is then possible implicitly.
+
+To convert the KML files into a MilX format, this tool uses a custom rule set(inside `co2milx.txt`) to generate MilX units. Since the ruleset is quite small right now, you *might* face errors. To fix this, either:
  - Open a new issue on github
  - Contact Serpent on CO2 discord
  - Open map.army, and then manually check what the code for that unit is, and add it to your local rule set.
