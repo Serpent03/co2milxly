@@ -3,23 +3,32 @@
 !! This file contains information on all the different
 !! types of units and its MilX equivalent.
 
-infantry,leginf     : S-GPUCI--------
-infantry,motinf     : S-GPUCIM-------
-infantry,cav        : S-GPUCRVG------
-infantry,nonarmhq   : S-GPUCI---A----
-infantry,mechrecon  : S-GPUCRVG------
-artillery,antitank  : S-G-UCAA-------
-logistics,base      : S-GPUSS--------
-artillery,mortar    : S-GPUCF--------
-infantry,mginf      : S-G-UCDG-------
-infantry,combateng  : S-G-UCEC-------
-artillery,artillery : S-GPUCF--------
-armour,armhq        : S-G-UCA---A----
-armour,tank         : S-G-UCA--------
-armour,assaultgun   : S-GPUCATL------
-infantry,legrecon   : S-GPUCRVG------
-infantry,infantry   : S-GPUCI--------
-artillery,spinfgun  : S-G-UCFHE------
+infantry,gliderinf    : S-G-UCIS-------
+infantry,mechinf      : S-GPUCIZ-------
+infantry,leginf       : S-GPUCI--------
+infantry,motinf       : S-GPUCIM-------
+infantry,cav          : S-GPUCRVG------
+infantry,nonarmhq     : S-GPUCI---A----
+infantry,mechrecon    : S-GPUCRVG------
+artillery,antitank    : S-G-UCAA-------
+artillery,motat       : S-G-UCAAO------
+logistics,base        : S-GPUSS--------
+artillery,mortar      : S-GPUCF--------
+infantry,mginf        : S-G-UCDG-------
+infantry,combateng    : S-G-UCEC-------
+artillery,artillery   : S-GPUCF--------
+artillery,sphowitzer  : SFG-UCFHE------
+artillery,abnarty     : S-G-UCFHA------
+armour,armhq          : S-G-UCA---A----
+armour,tank           : S-G-UCA--------
+armour,assaultgun     : S-GPUCATL------
+infantry,legrecon     : S-GPUCRVG------
+infantry,infantry     : S-GPUCI--------
+artillery,spinfgun    : S-G-UCFHE------
+artillery,mothowitzer : SFG-UCFHE------
+artillery,motmortar   : SFG-UCFHE------
+artillery,motflak     : SFG-UCFHE------
+armour,armouredrecon  : S-G-UCRVA------
 
 !! If you get an error like "key error for infantry,coyhq"
 !! or something like "key error for artillery,depot", etc.,
@@ -27,4 +36,3 @@ artillery,spinfgun  : S-G-UCFHE------
 !! with the conversion information. In that case, feel free
 !! to open a new issue on github or contact Serpent on the 
 !! Command Ops 2 discord.
-
