@@ -29,6 +29,26 @@ def pretty_print(l):
     print(f"Type: {k['type']:<20}")
     print(f"Location: {str(k['location']):<20}\n")
 
+def create_acronym(name: str, ignore_list: list, replace_list: str) -> str:
+  # Get the words in the ignore list out of the name
+  temp_list = list(filter(
+    lambda x: x.lower() not in ignore_list and\
+      '(' not in x and ')' not in x,
+    name.split()))
+  # Replace things like "A Company Northshore Regiment"
+  # with A / Northshore Regiment
+  for i, v in enumerate(temp_list[:-1]):
+    if v.lower() in replace_list:
+        temp_list[i] = "/"
+
+  # Check if the string can now fit within 21 characters,
+  # if not, we'll only take the numbers + first characters
+  tstr = " ".join(temp_list)
+  if len(tstr) < 21:
+    return tstr
+  # If we're abbreviating, then add "." for words
+  return "".join([f"{w[0]}." if not w.isdigit() else f"{w} " for w in temp_list]).replace("/.", "/ ").replace("./", " /")
+
 def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
   """Given a KML file F, read
   all the units exported by the Command Ops 2
@@ -75,7 +95,6 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
     "troop": "D",
     "pl": "D",
     "squadron": "E",
-    "company": "E",
     "coy": "F",
     "battery": "E",
     "bn": "F",
@@ -92,11 +111,20 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
   # the unit metadata.
   hostile_modifier_idx = 1
   size_modifier_idx = 11
+  
+  # For concatenation of unit names, if bigger than
+  # a certain length, we must ignore these common
+  # words, and clean out the unit name for effiecient
+  # abbreviation.
+  name_ignore_list = ["the", "own", "of", "royal", "bn", "regiment",
+                      "de", "la"]
+  replace_list = ["coy", "company", "bn", "regiment", "pl", "platoon",
+                  "squadron", "sqn"]
+  num_replace_list = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th",
+                      "8th", "9th", "0th", "2th", "3th"]
 
   units = []
   for p in placemarks:
-    # Get the name, type and size of this unit
-    # along with other data
     uname = p.find(f"{ns}name").text.strip()
     location = p.find(f"{ns}Point")[0].text.split(",")
 
@@ -128,19 +156,17 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
     # do final checks
     # MilX has a name length limit of 21
     # characters, so we have to do a concatenation.
-    # this part can still be approved.
     if len(uname) > 21:
-      concat = list(map(
-        lambda x: x[0] if x.isalpha() else "",
-        uname.split()[1:]))
-      uname = f"{uname.split()[0]} " + "".join(concat)
+      for num in num_replace_list:
+        uname = uname.replace(num, num[0])
+      uname = create_acronym(uname, name_ignore_list, replace_list)
 
     if len(usuperior) > 21:
-      concat = list(map(
-        lambda x: x[0] if x.isalpha() else "",
-        usuperior.split()[1:]))
-      usuperior = f"{usuperior.split()[0]} " + "".join(concat)
-  
+      for num in num_replace_list:
+        usuperior = usuperior.replace(num, num[0])
+      usuperior = create_acronym(usuperior, name_ignore_list, replace_list)
+
+
     unit = {}
     unit["name"] = uname
     unit["superior"] = usuperior
@@ -150,7 +176,7 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
 
   return layer_name, units
 
-def write_to_milx(layer_name: str, units: list, outfile: str):
+def write_to_milx(layer_name: str, units: list, outfile: str) -> None:
   """Given a LAYER_NAME, along with a collection of UNITS,
   this function generates a MilX/map.army compatible OUTFILE.
   """
