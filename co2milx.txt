@@ -16,7 +16,7 @@ infantry,combateng  : S-G-UCEC-------
 artillery,artillery : S-GPUCF--------
 armour,armhq        : S-G-UCA---A----
 armour,tank         : S-G-UCA--------
-armour,assaultgun   : S-G-UCFH-------
+armour,assaultgun   : S-GPUCATL------
 infantry,legrecon   : S-GPUCRVG------
 infantry,infantry   : S-GPUCI--------
 artillery,spinfgun  : S-G-UCFHE------
@@ -27,3 +27,4 @@ artillery,spinfgun  : S-G-UCFHE------
 !! with the conversion information. In that case, feel free
 !! to open a new issue on github or contact Serpent on the 
 !! Command Ops 2 discord.
+
