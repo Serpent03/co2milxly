@@ -20,6 +20,7 @@ DESCRIPTION
 """
 
 import sys
+import traceback
 from lxml import etree as ET
 
 def pretty_print(l):
@@ -35,11 +36,26 @@ def create_acronym(
     replace_list: str, 
     special_words: list
   ) -> str:
+  # Remove all odd characters
+  name = name.replace(",", "").replace(".", "")
+
   # Get the words in the ignore list out of the name
   temp_list = list(filter(
-    lambda x: x.lower() not in ignore_list and\
-      '(' not in x and ')' not in x,
+    lambda x: x.lower() not in ignore_list,
     name.split()))
+
+  # ignore all elements inside parenthesis
+  # perhaps not the best solution, but it 
+  # works, heuristically speaking.
+  p_start_idx = 0
+  p_end_idx = -1
+  for i,v in enumerate(temp_list):
+    if '(' in v and p_start_idx == 0:
+      p_start_idx = i
+    if ')' in v and p_end_idx == -1:
+      p_end_idx = i
+  temp_list = temp_list[:p_start_idx] + temp_list[p_end_idx + 1:]
+
   # Replace things like "A Company Northshore Regiment"
   # with A / Northshore Regiment
   for i, v in enumerate(temp_list[:-1]):
@@ -56,10 +72,11 @@ def create_acronym(
   # We'll also ignore special words, like AT, Mortar, ..
   for i, word in enumerate(temp_list):
     if word.lower() in special_words or word.isdigit():
+      temp_list[i] = f" {word} "
       continue
-    temp_list[i] = word[0].upper()
+    temp_list[i] = f"{word[0].upper()}"
 
-  return "".join([f"{w}." if not w.isdigit() else f"{w} " for w in temp_list]).replace("/.", "/ ").replace("./", " /")
+  return "".join(temp_list).replace("/.", "/ ").replace("./", " /").strip()
 
 def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
   """Given a KML file F, read
@@ -129,12 +146,12 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
   # words, and clean out the unit name for effiecient
   # abbreviation.
   name_ignore_list = ["the", "own", "of", "royal", "bn", "regiment",
-                      "de", "la"]
-  replace_list = ["coy", "company", "bn", "regiment", "pl", "platoon",
+                      "de", "la", "and"]
+  replace_list = ["coy", "company", "bn", "pl", "platoon",
                   "squadron", "sqn"]
   num_replace_list = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th",
                       "8th", "9th", "0th", "2th", "3th"]
-  special_words = ["mortar", "at"]
+  special_words = ["mortar", "at", "base", "trains"]
 
   units = []
   for p in placemarks:
@@ -150,11 +167,17 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
     extended_data = p.find(f"{ns}ExtendedData")
     if extended_data is not None:
       superior_data = extended_data.find(f"{ns}Data[@name='superior']")
-      if superior_data is not None:
+      current_superior_data = extended_data.find(
+        f"{ns}Data[@name='superior']")
+      if current_superior_data is not None:
         usuperior = superior_data[0].text.strip()
+      elif superior_data is not None:
+        usuperior = superior_data[0].text.strip()
+
       usize = extended_data.find(f"{ns}Data[@name='size']")
       if usize is not None:
         usize = usize[0].text.strip().lower()
+
       utype_text = extended_data.find(f"{ns}Data[@name='type']")
       subtype = extended_data.find(f"{ns}Data[@name='subtype']")
       if utype_text is not None:
@@ -266,7 +289,8 @@ if __name__ == "__main__":
 
   try:
     layer_name, units = read_kml(infile)
-    # pretty_print(units)
+    pretty_print(units)
     write_to_milx(layer_name, units, outfile)
   except:
+    traceback.print_exc()
     print(htext)
