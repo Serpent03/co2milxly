@@ -29,7 +29,12 @@ def pretty_print(l):
     print(f"Type: {k['type']:<20}")
     print(f"Location: {str(k['location']):<20}\n")
 
-def create_acronym(name: str, ignore_list: list, replace_list: str) -> str:
+def create_acronym(
+    name: str, 
+    ignore_list: list, 
+    replace_list: str, 
+    special_words: list
+  ) -> str:
   # Get the words in the ignore list out of the name
   temp_list = list(filter(
     lambda x: x.lower() not in ignore_list and\
@@ -46,8 +51,15 @@ def create_acronym(name: str, ignore_list: list, replace_list: str) -> str:
   tstr = " ".join(temp_list)
   if len(tstr) < 21:
     return tstr
+
   # If we're abbreviating, then add "." for words
-  return "".join([f"{w[0]}." if not w.isdigit() else f"{w} " for w in temp_list]).replace("/.", "/ ").replace("./", " /")
+  # We'll also ignore special words, like AT, Mortar, ..
+  for i, word in enumerate(temp_list):
+    if word.lower() in special_words or word.isdigit():
+      continue
+    temp_list[i] = word[0].upper()
+
+  return "".join([f"{w}." if not w.isdigit() else f"{w} " for w in temp_list]).replace("/.", "/ ").replace("./", " /")
 
 def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
   """Given a KML file F, read
@@ -122,6 +134,7 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
                   "squadron", "sqn"]
   num_replace_list = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th",
                       "8th", "9th", "0th", "2th", "3th"]
+  special_words = ["mortar", "at"]
 
   units = []
   for p in placemarks:
@@ -159,12 +172,14 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
     if len(uname) > 21:
       for num in num_replace_list:
         uname = uname.replace(num, num[0])
-      uname = create_acronym(uname, name_ignore_list, replace_list)
+      uname = create_acronym(
+        uname, name_ignore_list, replace_list, special_words)
 
     if len(usuperior) > 21:
       for num in num_replace_list:
         usuperior = usuperior.replace(num, num[0])
-      usuperior = create_acronym(usuperior, name_ignore_list, replace_list)
+      usuperior = create_acronym(
+        usuperior, name_ignore_list, replace_list, special_words)
 
 
     unit = {}
@@ -251,7 +266,7 @@ if __name__ == "__main__":
 
   try:
     layer_name, units = read_kml(infile)
-    pretty_print(units)
+    # pretty_print(units)
     write_to_milx(layer_name, units, outfile)
   except:
     print(htext)
