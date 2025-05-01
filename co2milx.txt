@@ -3,32 +3,45 @@
 !! This file contains information on all the different
 !! types of units and its MilX equivalent.
 
-infantry,gliderinf    : S-G-UCIS-------
-infantry,mechinf      : S-GPUCIZ-------
-infantry,leginf       : S-GPUCI--------
-infantry,motinf       : S-GPUCIM-------
-infantry,cav          : S-GPUCRVG------
-infantry,nonarmhq     : S-GPUCI---A----
-infantry,mechrecon    : S-GPUCRVG------
-artillery,antitank    : S-G-UCAA-------
-artillery,motat       : S-G-UCAAO------
 logistics,base        : S-GPUSS--------
-artillery,mortar      : S-GPUCF--------
-infantry,mginf        : S-G-UCDG-------
+
+infantry,smginf       : S-GPUCI--------
+infantry,parainf      : S-G-UCIA-------
+infantry,nonarmhq     : S-GPUCI---A----
+infantry,motrecon     : S-GPUCIM-------
+infantry,motinf       : S-GPUCIM-------
+infantry,mginf        : S-GPUCI--------
+infantry,mechrecon    : S-GPUCRVG------
+infantry,mechinf      : S-GPUCIZ-------
+infantry,legrecon     : S-GPUCRVG------
+infantry,leginf       : S-GPUCI--------
+infantry,infantry     : S-GPUCI--------
+infantry,gliderinf    : S-G-UCIS-------
 infantry,combateng    : S-G-UCEC-------
-artillery,artillery   : S-GPUCF--------
+infantry,cav          : S-GPUCRVG------
+infantry,bicycleinf   : S-G-UCRVG------
+infantry,atinf        : S-G-UCAA-------
+
+artillery,sprl        : S-G-UCFRMS----- !! self prop MRL
+artillery,spinfgun    : S-G-UCFHE------
 artillery,sphowitzer  : SFG-UCFHE------
+artillery,spflak      : S-G-UCDG-------
+artillery,motmortar   : SFG-UCFHE------
+artillery,mothowitzer : SFG-UCFHE------
+artillery,motflak     : SFG-UCFHE------
+artillery,motat       : S-G-UCAAO------
+artillery,mortar      : S-GPUCF--------
+artillery,howitzer    : SFG-UCFHE------
+artillery,artillery   : S-GPUCF--------
+artillery,antitank    : S-G-UCAA-------
 artillery,abnarty     : S-G-UCFHA------
-armour,armhq          : S-G-UCA---A----
+
 armour,tank           : S-G-UCA--------
 armour,assaultgun     : S-GPUCATL------
-infantry,legrecon     : S-GPUCRVG------
-infantry,infantry     : S-GPUCI--------
-artillery,spinfgun    : S-G-UCFHE------
-artillery,mothowitzer : SFG-UCFHE------
-artillery,motmortar   : SFG-UCFHE------
-artillery,motflak     : SFG-UCFHE------
 armour,armouredrecon  : S-G-UCRVA------
+armour,armouredcar    : S-G-UCAW-------
+armour,armhq          : S-G-UCA---A----
+
 
 !! If you get an error like "key error for infantry,coyhq"
 !! or something like "key error for artillery,depot", etc.,
