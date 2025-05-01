@@ -117,6 +117,9 @@ def read_kml(f: str, conversion_file: str="co2milx.txt") -> dict:
     data = list(filter(lambda x: not x.startswith("!!")\
                         and len(x) > 0, data))
     for row in data:
+      # if there are some comments, ignore them
+      c_idx = row.find("!")
+      row = row[0:c_idx]
       k,v = row.strip().split(':')
       types[k.strip()] = v.strip()
 
