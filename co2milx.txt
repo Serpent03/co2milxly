@@ -3,6 +3,7 @@
 !! This file contains information on all the different
 !! types of units and its MilX equivalent.
 
+logistics,logistics   : S-GPUSS--------
 logistics,base        : S-GPUSS--------
 
 infantry,smginf       : S-GPUCI--------
@@ -16,6 +17,7 @@ infantry,mechinf      : S-GPUCIZ-------
 infantry,legrecon     : S-GPUCRVG------
 infantry,leginf       : S-GPUCI--------
 infantry,infantry     : S-GPUCI--------
+infantry,hwinf        : S-G-UCFHE------ 
 infantry,gliderinf    : S-G-UCIS-------
 infantry,combateng    : S-G-UCEC-------
 infantry,cav          : S-GPUCRVG------
@@ -24,14 +26,16 @@ infantry,atinf        : S-G-UCAA-------
 
 artillery,sprl        : S-G-UCFRMS----- !! self prop MRL
 artillery,spinfgun    : S-G-UCFHE------
-artillery,sphowitzer  : SFG-UCFHE------
+artillery,sphowitzer  : S-G-UCFHE------
 artillery,spflak      : S-G-UCDG-------
-artillery,motmortar   : SFG-UCFHE------
-artillery,mothowitzer : SFG-UCFHE------
-artillery,motflak     : SFG-UCFHE------
+artillery,motrl       : S-G-UCFRMS----- !! self prop MRL
+artillery,motmortar   : S-G-UCFHE------
+artillery,mothowitzer : S-G-UCFHE------
+artillery,motflak     : S-G-UCFHE------
 artillery,motat       : S-G-UCAAO------
 artillery,mortar      : S-GPUCF--------
-artillery,howitzer    : SFG-UCFHE------
+artillery,infgun      : S-G-UCFHE------
+artillery,howitzer    : S-G-UCFHE------
 artillery,artillery   : S-GPUCF--------
 artillery,antitank    : S-G-UCAA-------
 artillery,abnarty     : S-G-UCFHA------
