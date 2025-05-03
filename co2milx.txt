@@ -23,8 +23,10 @@ infantry,combateng    : S-G-UCEC-------
 infantry,cav          : S-GPUCRVG------
 infantry,bicycleinf   : S-G-UCRVG------
 infantry,atinf        : S-G-UCAA-------
+infantry,sf           : S-F-G----------
 
 artillery,sprl        : S-G-UCFRMS----- !! self prop MRL
+artillery,spgun       : S-G-UCFHE------
 artillery,spinfgun    : S-G-UCFHE------
 artillery,sphowitzer  : S-G-UCFHE------
 artillery,spflak      : S-G-UCDG-------
@@ -45,6 +47,7 @@ armour,assaultgun     : S-GPUCATL------
 armour,armouredrecon  : S-G-UCRVA------
 armour,armouredcar    : S-G-UCAW-------
 armour,armhq          : S-G-UCA---A----
+armour,tankdestroyer  : S-G-UCAAO------ !! anti tank
 
 
 !! If you get an error like "key error for infantry,coyhq"
