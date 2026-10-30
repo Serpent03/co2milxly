@@ -17,7 +17,7 @@ infantry,mechinf      : S-GPUCIZ-------
 infantry,legrecon     : S-GPUCRVG------
 infantry,leginf       : S-GPUCI--------
 infantry,infantry     : S-GPUCI--------
-infantry,hwinf        : S-G-UCFHE------ 
+infantry,hwinf        : S-G-UCFHE------
 infantry,gliderinf    : S-G-UCIS-------
 infantry,combateng    : S-G-UCEC-------
 infantry,cav          : S-GPUCRVG------
@@ -54,5 +54,5 @@ armour,tankdestroyer  : S-G-UCAAO------ !! anti tank
 !! or something like "key error for artillery,depot", etc.,
 !! then that means this(not exhaustive) list is incomplete
 !! with the conversion information. In that case, feel free
-!! to open a new issue on github or contact Serpent on the 
+!! to open a new issue on github or contact Serpent on the
 !! Command Ops 2 discord.
