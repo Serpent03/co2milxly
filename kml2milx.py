@@ -1,50 +1,7 @@
 #!/usr/bin/env python3
 """
-cog2milxly.py - Convert Command Ops 2 save files (.cog) straight into map.army
-MilX layer files (.milxly). It does not need the game's GameStatExporter.exe.
-
-Usage:
-    python cog2milxly.py                 # opens the map window
-    python cog2milxly.py save.cog        # opens the map window with that save
-    python cog2milxly.py --help          # command-line export (no window)
-
-The window finds the Command Ops 2 folder (CmdOps.exe) from Steam and Windows
-install records, or asks once. It draws the save's map from <game>/Maps/<map>.cop
-with every unit on it. Click two places you can identify, type their real
-lat, lon, then EXPORT IMAGE (PNG of the scene) or EXPORT MILXLY (map.army).
-Needs Pillow for drawing: pip install pillow
-
-Unit symbols come from the game's establishment database (the .coe file the
-save names, e.g. COTAEstab.coe, or its .xml export). The tool searches for it
-near the save; otherwise pick it with "Estab…" or --estab. Without it, symbols
-are guessed from unit names. A co2milxly-style co2milx.txt can override the
-type-to-symbol table ("Rules…" / --rules); its keys match GameStatExporter's.
-
-Output: one .milxly file per layer (Friendly, Enemy, Objectives), in the
-MilX V3.1 layout used by https://github.com/Serpent03/co2milxly. Open each one
-in map.army as a layer.
-
-How a .cog file is laid out (reverse-engineered, not official):
-  * A 32-byte "POD" header. The game clock is stored at offset 0x32 as minutes
-    since 1 Jan 1904.
-  * A series of 144-byte blocks: a 16-byte header (class, object id, next block,
-    sequence number) followed by 128 bytes of data. Joining an object's blocks
-    in sequence order rebuilds the object.
-  * Class 92 objects are units, class 103 are orders/tasks, and class 169 are
-    objectives.
-  * Unit positions are in game-map units (very likely metres), with x going
-    east and y going SOUTH from the map's north-west corner.
-
-A save file holds no real-world coordinates, so you georeference it: give 2-4
-reference points (an objective/unit, or a typed game "x, y" such as a map
-corner) with their real lat/lon. By default this reproduces GameStatExporter's
-maths (Web Mercator EPSG:3857) but fits scale + rotation by default, because
-some Command Ops maps are not drawn north-up (Elasson is turned about 30°);
---model axis gives GameStatExporter's exact per-axis result. If the save's map
-(.cop, in the game's Maps folder) is found, its village/hill names can be used
-as reference points. The fit is checked
-before export: Command Ops maps are about 1 m per game unit, so a fit far from
-that means a reference coordinate is wrong.
+kml2milxly.py - Convert Command Ops 2 save files (.cog) straight into map.army
+MilX layer files (.milxly).
 """
 
 import cmath
