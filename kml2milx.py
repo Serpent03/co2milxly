@@ -1660,7 +1660,7 @@ def likely_source(cog, friendly_side, x, y, max_range=3000):
 
 # Arrow graphics: MIL-STD-2525C puts the arrowhead at the first point. If map.army
 # draws them backwards, set this to False.
-ARROW_TIP_FIRST = True
+ARROW_TIP_FIRST = False
 
 ORDER_GRAPHIC = {   # task type -> (kind, 2525C category + function)
     "Move": ("arrow", "G", "OLKGS-"), "Exit": ("arrow", "G", "OLKGS-"),
