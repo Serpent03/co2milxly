@@ -5,7 +5,7 @@ a = Analysis(
     ['kml2milx.py'],
     pathex=[],
     binaries=[],
-    datas=[("co2milx.txt", ".")],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

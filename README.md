@@ -9,29 +9,26 @@ You need the following on your computer to run this tool:
 ```
 
 ## Examples
-Mons, 1914, by Zed
-![Mons, 1914, by Zed](https://i.imgur.com/JGC6nN9.jpeg)
 
-Skirmish at Carpiquet Airfield, 1944, by Bie
-![Skirmish at Carpiquet Airfield, 1944, by Bie](https://i.imgur.com/rLuKerz.png)
+### Platamon, 1941, Foothills of the Gods
+![Exporter](docs/platamon-png.png)
+![Final result](docs/platamon-mil.png)
 
+### Manhay Crossroads, 1944, Battle of the Bulge
+![Exporter](docs/manhay-editor.png)
+![Final result](docs/manhay-mil.png)
 
 ## Usage
-If running locally, simply do: `python3 ./kml2milx.py <your input kml> <name of output milx file>`.
+Open the .exe, and load the save `.cog` file of choice.
+
+You now only have to select two points on the map (preferably, as far away from each other as possible), and then export the data!
 
 ## How does it work?
-First, run CO2's `GameStatExporter.exe`, available inside the `steam/steamapps/common/Command Ops 2/` directory. An example command could look like this: 
+To achieve the generation of KML files, the program links two coordinates in the game(X,Y) against two coordinates in the real life(lat, long). 
 
-`./GameStatExporter.exe --x1 7040 --y1 6042 --lat1 49.16842242789466 --lon1 -0.4080172720070224 --x2 1160 --y2 4456 --lat2 49.178824855714275 --lon2 -0.4867884792074451 --input ".\Saved Games\attack_on_airport_D1_0505.cog"`
-
-To achieve the generation of KML files, the `GameStatExporter.exe` links two coordinates in the game(X,Y) against two coordinates in the real life(lat, long). Accuracy gets better and better if both of these coordinates are as far away from each other as possible - like the diagonally opposite corners of the map. What it basically does is tells the tool that `x1,y1` in the game maps to `lat1,lon1`; `x2,y2` maps to `lat2,lon2`; and interpolation for any game coordinate to real world WGS84 coordinate is then possible implicitly.
+Accuracy gets better and better if both of these coordinates are as far away from each other as possible - like the diagonally opposite corners of the map. What it basically does is tells the tool that `x1,y1` in the game maps to `lat1,lon1`; `x2,y2` maps to `lat2,lon2`; and interpolation for any game coordinate to real world WGS84 coordinate is then possible implicitly.
 
 To convert the KML files into a MilX format, this tool uses a custom rule set(inside `co2milx.txt`) to generate MilX units. Since the ruleset is quite small right now, you *might* face errors. To fix this, either:
  - Open a new issue on github
  - Contact Serpent on CO2 discord
  - Open map.army, and then manually check what the code for that unit is, and add it to your local rule set.
-
-## Future TODO ideas
- - Host this tool on a website for everyone to use.
- - Keep a historical track of all units and record when a friendly unit surrendered, and how exactly they moved and where.
- - Generate a convex hull/envelope around the friendly troops to simulate the area of influence on the map. Possibly inside another layer.
